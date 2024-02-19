@@ -9,16 +9,42 @@ export default {
   components: {
     NavbarApp,
     SliderApp,
+
   },
+
+  data() {
+    return {
+      nav: ['home', 'pages', 'portfolio', 'blog', 'shop', 'element']
+    };
+  },
+  
+
+  
+
 };
 </script>
 
 <template>
  
-  <NavbarApp/>
+  <header>
 
-  <SliderApp/>
+    <nav>
 
+      <img src="../../Assets/img/logo-sidearea-1.png" alt="">
+
+      <NavbarApp 
+      :propsElementNav="nav"/>
+     
+      
+      
+      <img src="../../Assets/svg/svg-1.svg" alt="">
+
+    </nav>
+    
+
+    <SliderApp/>
+
+  </header>
 
 </template>
 
@@ -26,5 +52,17 @@ export default {
 @use "../../styles/partials/variables" as *;
 @use "../../styles/partials/mixins" as *;
 
+nav{
+  border: 1px solid red;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  img{
+    padding: 20px;
+    border: 1px solid blue;
+    display: block;
+    max-width: 100%;
+  }
+}
 
 </style>

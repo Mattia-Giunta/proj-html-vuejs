@@ -14,7 +14,10 @@ html{
     font-style: normal;
 }
 
-
+header{
+    background-color: gray;
+    height: 550px;
+}
 h1 {
     color: $font-color;
     @include main-font-center;

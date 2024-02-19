@@ -8,7 +8,9 @@ export default {
 
 <template>
  
-  <h1>SliderApp</h1>
+  <figure>
+
+  </figure>
 
 
 </template>
@@ -17,5 +19,8 @@ export default {
 @use "../../styles/partials/variables" as *;
 @use "../../styles/partials/mixins" as *;
 
-
+figure{
+  border: 1px solid yellow;
+  height: calc(100% - 80px);
+}
 </style>
