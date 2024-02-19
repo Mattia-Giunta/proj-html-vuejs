@@ -14,7 +14,8 @@ export default {
 
   data() {
     return {
-      nav: ['home', 'pages', 'portfolio', 'blog', 'shop', 'element']
+      nav: ['home', 'pages', 'portfolio', 'blog', 'shop', 'element'],
+      
     };
   },
   
@@ -53,13 +54,11 @@ export default {
 @use "../../styles/partials/mixins" as *;
 
 nav{
-  border: 1px solid red;
+  padding: 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   img{
-    padding: 20px;
-    border: 1px solid blue;
     display: block;
     max-width: 100%;
   }

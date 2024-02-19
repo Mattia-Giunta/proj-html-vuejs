@@ -33,17 +33,21 @@ export default {
 @use "../../styles/partials/mixins" as *;
 
 ul{
-  border: 1px solid green;
+  
   width: 100%;
   display: flex;
   justify-content: flex-end;
-  gap: 4%;
+  gap: 3%;
   list-style-type: none;
-  padding-right: 20px;
+  padding-right: 40px;
   li{
-    font-size: 11px;
+    font-size: 13px;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 4px;
+    font-weight: bold;
+    &:hover{
+      background-image: linear-gradient(to bottom, #ffffff 50%, #F5D8CA 50%); 
+    }
   }
 }
 

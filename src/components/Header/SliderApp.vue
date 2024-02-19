@@ -3,12 +3,16 @@
 
 export default {
   name: "SliderApp",
+
+  
 };
 </script>
 
 <template>
  
   <figure>
+
+
 
   </figure>
 
