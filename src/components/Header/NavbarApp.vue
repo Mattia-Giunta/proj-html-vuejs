@@ -19,7 +19,7 @@ export default {
 
   <ul>
 
-    <li v-for="item in propsElementNav" :key="item">{{ item }}</li>
+    <li v-for="(element,item) in propsElementNav" :key="item">{{ element }}</li>
 
   </ul>
 
