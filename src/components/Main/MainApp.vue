@@ -12,7 +12,35 @@ export default {
         WorkingProcessApp,
         MessageAreaApp,
         EventCalendarApp,
-    }   
+    }, 
+    
+    data() {
+    return {
+
+     
+      cardsBlog: [
+          {
+            image: 'src/assets/img/h-2-blog-img-1.jpg',
+            title: 'This way, loves: a detailed guide through new design',
+            author:'Emily Fields',
+            date: 'may 19',
+          },
+          {
+            image: 'src/assets/img/h-2-blog-img-2.jpg',
+            title: 'I try to give people a different way of looking art',
+            author:'Emily Fields',
+            date: 'may 19',
+          },
+          {
+            image: 'src/assets/img/h-2-blog-img-3.jpg',
+            title: 'Introduce Richard Laperrière of those amazing feature',
+            author:'Emily Fields',
+            date: 'may 19',
+          },
+          
+      ],
+    };
+  },
 };
 
 </script>
@@ -22,7 +50,8 @@ export default {
     <CardsApp/>
     <WorkingProcessApp/>
     <MessageAreaApp/>
-    <EventCalendarApp/>
+    <EventCalendarApp
+    :propsElementBlog="cardsBlog"/>
 
 </template>
 

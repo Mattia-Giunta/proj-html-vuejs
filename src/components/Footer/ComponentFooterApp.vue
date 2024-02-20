@@ -8,7 +8,7 @@ export default {
 
 <template>
  
-  <h1>ComponentFooterApp</h1>
+  
 
 
 </template>

@@ -24,20 +24,22 @@ export default {
 
       slides: [
           {
-            image: '../../Assets/img/h-2-slider-img-11.png',
-            title: 'Our new folio full of joy',
-            text: 'Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,consectetur, adipisci velit, sed quia non numquam eius modi.',
-
-          },
-          {
-            image: '../../Assets/img/h-2-slider-img-15.png',
-            image2:'../../Assets/img/h-2-slider-img-16.png',
-            title: 'Devotion that never ends',
+            image: 'src/Assets/img/h-2-slider-img-11.png',
+            title: 'Our new folio full of',
+            word:'joy',
             text: 'Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,consectetur, adipisci velit, sed quia non numquam eius modi.',
           },
           {
-            image: '../../Assets/img/short-slider-rev-1-img-3.png',
-            title: 'Project made with love',
+            image: 'src/Assets/img/h-2-slider-img-15.png',
+            image2:'src/Assets/img/h-2-slider-img-16.png',
+            title: 'Devotion that never',
+            word:'ends',
+            text: 'Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,consectetur, adipisci velit, sed quia non numquam eius modi.',
+          },
+          {
+            image: 'src/Assets/img/short-slider-rev-1-img-3.png',
+            title: 'Project made with',
+            word:'love',
             text: 'Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,consectetur, adipisci velit, sed quia non numquam eius modi.',
           },
           
@@ -88,6 +90,7 @@ nav{
   img{
     display: block;
     max-width: 100%;
+    cursor: pointer;
   }
 }
 

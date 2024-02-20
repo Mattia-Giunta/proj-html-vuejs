@@ -45,6 +45,7 @@ ul{
     text-transform: uppercase;
     letter-spacing: 4px;
     font-weight: bold;
+    cursor: pointer;
     &:hover{
       background-image: linear-gradient(to bottom, #ffffff 50%, #F5D8CA 50%); 
     }
