@@ -3,12 +3,51 @@
 
 export default {
   name: "ComponentFooterApp",
+
+
+  data() {
+
+    return {
+      showButton: false
+    };   
+  },
+
+
+  methods: {
+    
+    scrollToTop() {
+        
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    },
+
+    handleScroll() {
+      if (window.scrollY > 500) {
+          this.showButton = true;
+      } else {
+          this.showButton = false;
+      }
+    },
+  },
+
+  mounted() {
+      window.addEventListener('scroll', this.handleScroll);
+  },
+
+  beforeDestroy() {
+      window.removeEventListener('scroll', this.handleScroll);
+  }
+
 };
 </script>
 
 <template>
  
   <section>
+  
+    <button v-if="showButton" @click="scrollToTop"></button>
 
     <div class="container">
 
@@ -65,6 +104,8 @@ export default {
     </div>
 
 
+    
+
   </section>
 
 
@@ -77,6 +118,7 @@ export default {
 section{
   background-color: #C0E1CF;
   padding: 50px;
+  
   .container{
     
     width: 70%;
@@ -104,6 +146,24 @@ section{
   }
 }
 
+button {
+    
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #c0e1cf;
+    color: white;
+    border: none;
+    padding: 25px 25px;
+    cursor: pointer;
+    background-image: url(../../Assets/svg/svg-2.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+button:hover {
+    background-color: #ACD5C7;
+}
 
 
 </style>
