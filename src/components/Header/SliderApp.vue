@@ -46,8 +46,8 @@ export default {
       startAutoScroll() {
         this.autoScroll = setInterval(() => {
           // Incrementa l'indice dell'immagine
-          this.prevImage()
-        }, 2000); // Cambia immagine ogni 5 secondi (5000 millisecondi)
+          this.autoScrollByOne('right')
+        }, 4000); // Cambia immagine ogni 5 secondi (5000 millisecondi)
       },
 
       // Funzione per fermare lo scorrimento automatico delle immagini
@@ -60,6 +60,94 @@ export default {
         this.currentImage = index;
       },
 
+      scrollByOne(direction){
+
+        const slider = this.$refs.slider;
+        let amount = slider.offsetWidth 
+
+        console.log(slider,amount,direction)
+
+        if(this.currentImage === 2){
+          direction = 'left'
+          this.currentImage = 0
+          amount = amount * 2
+        }
+
+        if(direction === 'left'){
+          amount *= -1;
+        }
+        if(direction ==='left' && this.currentImage !== 0){
+
+          this.currentImage --
+
+        }else if(direction ==='right' && this.currentImage !== this.propsElementSlider.length -1){
+
+          this.currentImage ++ 
+        }
+
+        slider.scrollBy({
+
+          left:amount,
+          behavior: 'smooth'
+        })
+
+      },
+
+      autoScrollByOne(direction){
+
+        const slider = this.$refs.slider;
+        let amount = slider.offsetWidth 
+
+        console.log(slider,amount,direction)
+
+         if(this.currentImage === 2){
+          direction = 'left'
+          this.currentImage = 0
+          amount = amount * 2
+         }
+
+        if(direction === 'left'){
+          amount *= -1;
+        }
+        if(direction ==='left' && this.currentImage !== 0){
+
+          this.currentImage --
+
+        }else if(direction ==='right' && this.currentImage !== this.propsElementSlider.length -1){
+
+          this.currentImage ++ 
+        }
+
+        slider.scrollBy({
+
+          left:amount,
+          behavior: 'smooth'
+        })
+
+      },
+
+      scroll(index) {
+            // stop autoSlider on user input 
+            // clearInterval(this.autoScroll)
+
+            const slider = this.$refs.slider;
+
+            let amount = slider.offsetWidth;
+
+            if (index - this.currentImage === 2 || index - this.currentImage === -2) {
+                amount = amount * 2
+            }
+            if (index < this.currentImage) {
+                amount *= -1;
+            }
+
+            this.currentImage = index
+            slider.scrollBy({
+                left: amount,
+                behavior: 'smooth'
+            });
+        }
+
     },
 };
 </script>
@@ -71,47 +159,50 @@ export default {
 
 
     <i class="fa-solid fa-circle-chevron-right"
-    @click="nextImage"></i>
+    @click="scrollByOne('right')"></i>
 
     <i class="fa-solid fa-circle-chevron-left"
-    @click="prevImage"></i>
+    @click="scrollByOne('left')"></i>
 
-    <section
+    <div ref="slider" class="container-slider">
 
-    @mouseover="stopAutoScroll"
+      <section 
+      v-for="(element,index) in propsElementSlider"
+      :key="index"
+      @mouseover="stopAutoScroll"
+      >
 
-    @mouseleave="startAutoScroll">
+        <!-- testo carosello sinistra -->
+        <div class="slider-left">
 
-      <!-- testo carosello sinistra -->
-      <div class="slider-left">
+          <div>
 
-        <div>
+            <h1>{{ element.title }}</h1>
 
-          <h1>{{ propsElementSlider[currentImage].title }}</h1>
+            <span>{{ element.word }}</span>
 
-          <span>{{ propsElementSlider[currentImage].word }}</span>
+            <p>{{ element.text }}</p>
 
-          <p>{{ propsElementSlider[currentImage].text }}</p>
+            <button type="button">Read More</button>
 
-          <button type="button">Read More</button>
-
+          </div>
+        
         </div>
-      
-      </div>
 
-      <!-- immagine di destra -->
-      <figure>
+        <!-- immagine di destra -->
+        <figure>
 
-        <img 
-        :src="`${propsElementSlider[currentImage].image}`" :alt="propsElementSlider[currentImage].title">
+          <img 
+          :src="`${element.image}`" :alt="element.title">
 
-        <img v-if="propsElementSlider[currentImage].image2" :src="`${propsElementSlider[currentImage].image2}`" :alt="propsElementSlider[currentImage].title">
+          <img v-if="element.image2" :src="`${element.image2}`" :alt="element.title">
+          
+        </figure>
         
-      </figure>
-      
-        
-    </section>
+          
+      </section>
 
+    </div>
   
 
     <div class="point">  
@@ -121,7 +212,7 @@ export default {
       :key="index"
       class="fa-solid fa-circle"
       :class=" (currentImage === index) ? 'active': ' ' "
-      @click="changeImage(index)"></i>
+      @click="scroll(index)"></i>
 
     </div>
 
@@ -133,80 +224,87 @@ export default {
 @use "../../styles/partials/variables" as *;
 @use "../../styles/partials/mixins" as *;
 
-
-section{
-  
-  height: 600px;
+.container-slider{
   display: flex;
-  transition: transform 0.5s ease;
-  
-    
-  
-  .slider-left{
-    width: 50%;
-    
-    padding-block: 100px;
+  width: 100%;
+  overflow-x: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }  /* Hide default scrollbar in WebKit browsers */
+
+
+  section{
+    width: 100%;
+    flex-shrink: 0;
     display: flex;
-    justify-content: flex-end;
-    div{
-      
-      width: 70%;
-      
-      h1{
-        font-weight: 300;
-        font-size: 90px;
-        display: inline;
+    height: 600px;
+    
+    .slider-left{
+      flex-basis: 50%;
+      padding-block: 100px;
+      padding-left: 300px;
+      display: flex;
+      justify-content: flex-end;
+
+      div{
         
-      }
-      span{
-        font-size: 90px;
-        font-family: "Playfair Display", serif;
-        font-optical-sizing: auto;
-        font-weight: 500;
-        font-style: normal;
-        margin-left: 5%;
-      }
-      p{
-        font-size: 20px;
-      }
-      button{
-        margin-top: 20px;
-        padding: 15px 50px;
-        text-transform: uppercase;
-        border: 3px solid #E1C0B0;
-        background: none;
-        font: inherit;
-        font-weight: bold;
-        font-size: 15px;
-        color: inherit;
-        cursor: pointer;
-        letter-spacing: 4px;
-        transition: background 0.3s ease-in-out;
-        &:hover{
-          background-color: #E1C0B0;
+        h1{
+          font-weight: 300;
+          font-size: 90px;
+          display: inline;
+          
         }
+        span{
+          font-size: 90px;
+          font-family: "Playfair Display", serif;
+          font-optical-sizing: auto;
+          font-weight: 500;
+          font-style: normal;
+          margin-left: 5%;
+        }
+        p{
+          font-size: 20px;
+        }
+        button{
+          margin-top: 20px;
+          padding: 15px 50px;
+          text-transform: uppercase;
+          border: 3px solid #E1C0B0;
+          background: none;
+          font: inherit;
+          font-weight: bold;
+          font-size: 15px;
+          color: inherit;
+          cursor: pointer;
+          letter-spacing: 4px;
+          transition: background 0.3s ease-in-out;
+          &:hover{
+            background-color: #E1C0B0;
+            color: white;
+          }
+        }
+      
       }
     
     }
-  
-  }
-  figure{
-    width: 50%;
-    display: flex;
-    align-items: center;
-    
-    padding: 50px;
-    justify-content: center;
-    img{
-      
-      display: block;
-      height: 100%;
+    figure{
+      width: 50%;
+      display: flex;
+      align-items: center;
+      padding: 50px;
+      justify-content: center;
+
+      img{
+        display: block;
+        height: 100%;
+      }
     }
   }
 }
 
 .container{
   position: relative;
+  width: 100%;
   .fa-circle-chevron-right{
     position: absolute;
     right: 20px;
@@ -242,5 +340,6 @@ section{
 .active{
   scale: 150%;
 }
+
 
 </style>
